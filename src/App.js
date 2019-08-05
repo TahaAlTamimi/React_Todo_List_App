@@ -31,15 +31,36 @@ export default class App extends Component {
       }
     ]
   };
+
   // changeData = () => {
   //   this.setState({ data: 'Alice Zaheer' });
   // }
+  toggleComplete = (id) => {
+      this.setState({
+        tasks:this.state.tasks.map(tasks=>{
+       if(tasks.id===id) {
+         tasks.isCompleted=!tasks.isCompleted
+
+       }
+       return tasks
+      })})
+    }
+
+    del=(id)=>{
+      console.log(id)
+      this.setState({tasks:[...this.state.tasks.filter(tasks=>tasks.id!==id)]});
+    }
   render() {
     const { tasks } = this.state;
     return (
       <React.Fragment>
         <h6>App</h6>
-        <Todos tasks={tasks} a={4} />
+        <input type="text"/>
+        
+        <button style={{backgroundColor:"green"}} onClick={this.state.title}>Add Task</button>
+        
+        <Todos tasks={tasks} a={4} toggleComplete={this.toggleComplete} del={this.del} />
+        
       </React.Fragment >
     );
   }
